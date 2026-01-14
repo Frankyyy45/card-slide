@@ -4,6 +4,10 @@ const container = document.querySelector("#cardsContainer");
 
 let users = [];
 
+let openCardIndex = null;
+
+
+
 // Fetch users from API (returns array or null)
 async function fetchUsers() {
   try {
@@ -48,7 +52,7 @@ function renderFallbackCards() {
 function renderUserCards(users) {
   container.innerHTML = "";
 
-  users.forEach((user) => {
+  users.forEach((user, index) => {
     const card = document.createElement("div");
     card.className = "card";
 
@@ -67,6 +71,27 @@ function renderUserCards(users) {
         <p><strong>Plats:</strong> ${user.location.city}, ${user.location.country}</p>
       </div>
     `;
+
+    const visaMerBtn = card.querySelector(".toggle-btn")
+
+    visaMerBtn.addEventListener('click', ()  => {
+
+        if (openCardIndex !== null && openCardIndex !== index ) {
+            const openCard = container.children[openCardIndex];
+            openCard.classList.remove('expanded');
+        }
+
+        const isOpen = card.classList.contains('expanded');
+
+        if (isOpen) {
+            card.classList.remove('expanded');
+            openCardIndex = null;
+        } else {
+            card.classList.add('expanded');
+            openCardIndex = index;
+        }
+
+    })
 
     container.appendChild(card);
   });

@@ -27,3 +27,11 @@ body {
   display: flex;
  
 }
+
+.extra-info {
+  display: none;
+}
+
+.card.expanded .extra-info {
+  display: block;
+}
