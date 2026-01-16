@@ -1,4 +1,8 @@
 
+import { DateHelper } from "../helpers/DateHelper.js";
+
+
+
 const API_URL = "https://randomuser.me/api/?results=3";
 const container = document.querySelector("#cardsContainer");
 
@@ -69,6 +73,7 @@ function renderUserCards(users) {
         <p><strong>Email:</strong> ${user.email}</p>
         <p><strong>Telefon:</strong> ${user.phone}</p>
         <p><strong>Plats:</strong> ${user.location.city}, ${user.location.country}</p>
+        <p><strong>Född:</strong> ${DateHelper.formatDate(user.dob.date)}
       </div>
     `;
 
